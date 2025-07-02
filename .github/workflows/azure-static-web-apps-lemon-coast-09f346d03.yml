@@ -62,7 +62,7 @@ jobs:
         with:
           azure_static_web_apps_api_token: d5e4e7f3abd31b6245373956d5dbafdab17c2037738a3e9373ecf005f0510d2d02-dea78ec9-c1a6-4ed0-96c9-01be4553b4df003060509f346d03
           action: "upload"
-          app_location: "/newapp/public/index.html"                 # Adjust if your frontend code is in subfolder
+          app_location: "/newapp"                 # Adjust if your frontend code is in subfolder
           api_location: ""                 # leave empty if no API
           output_location: "public"        # where the built static files go
           github_id_token: ${{ steps.idtoken.outputs.result }}
