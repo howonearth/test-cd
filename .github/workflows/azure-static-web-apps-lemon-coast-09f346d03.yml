@@ -1,18 +1,26 @@
 name: Azure Static Web Apps CI/CD
-
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
-
+    workflow_run:
+      workflows: ["Laravel"]
+      types:
+        - completed
 jobs:
-  build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+  second_job:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     types: [opened, synchronize, reopened, closed]
+#     branches:
+#       - main
+
+# jobs:
+#   build_and_deploy_job:
+#     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+#     runs-on: ubuntu-latest
     name: Build and Deploy Job
     permissions:
        id-token: write
@@ -34,7 +42,7 @@ jobs:
 
       - name: Build assets
         run: npm run build
-        working-directory: newapp/public # same as above
+        working-directory: newapp # same as above
 
       - name: Install OIDC Client from Core Package
         run: npm install @actions/core@1.6.0 @actions/http-client
