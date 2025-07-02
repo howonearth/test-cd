@@ -30,11 +30,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./ # or your frontend directory if different
+        working-directory: ./newapp # or your frontend directory if different
 
       - name: Build assets
         run: npm run build
-        working-directory: ./ # same as above
+        working-directory: ./newappp # same as above
 
       - name: Install OIDC Client from Core Package
         run: npm install @actions/core@1.6.0 @actions/http-client
